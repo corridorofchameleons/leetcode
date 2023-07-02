@@ -1,0 +1,6 @@
+# Pretty simple, but somehow you need to know about
+# the ranking functions of SQL instead of using your logic
+# what Leetcode is all about
+
+SELECT score, dense_rank() OVER (ORDER BY score DESC) AS 'rank'
+FROM Scores

@@ -1,0 +1,5 @@
+SELECT name AS Employee FROM
+  (SELECT name, salary, m_name, m_sal FROM Employee
+  JOIN (SELECT id AS m_id, name AS m_name, salary AS m_sal FROM Employee) AS mans
+  ON Employee.managerId = mans.m_id
+HAVING m_sal < salary) AS result;

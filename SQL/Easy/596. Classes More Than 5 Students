@@ -1,0 +1,4 @@
+SELECT class FROM
+(SELECT class, COUNT(class) AS n FROM Courses
+GROUP BY class
+HAVING n >= 5) AS tmp;

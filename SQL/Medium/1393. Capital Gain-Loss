@@ -1,0 +1,16 @@
+# slow version
+
+SELECT s1.stock_name, (sold - bought) AS capital_gain_loss FROM
+  (SELECT stock_name, SUM(price) AS bought FROM Stocks
+  WHERE operation = 'Buy'
+  GROUP BY stock_name) AS s1
+JOIN (SELECT stock_name, SUM(price) AS sold FROM Stocks
+  WHERE operation = 'Sell'
+  GROUP BY stock_name) AS s2
+ON s1.stock_name = s2.stock_name
+
+# the faster version (much faster)
+
+SELECT stock_name, SUM(CASE WHEN operation = 'Buy' THEN -price ELSE price END) AS capital_gain_loss
+FROM Stocks
+GROUP BY stock_name;

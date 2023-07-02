@@ -1,0 +1,5 @@
+SELECT person_name FROM (SELECT person_name, weight, turn, SUM(weight) OVER (ORDER BY turn) AS acc
+FROM Queue) AS tmp
+WHERE acc <= 1000
+ORDER BY acc DESC
+LIMIT 1;

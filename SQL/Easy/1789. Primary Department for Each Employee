@@ -1,0 +1,9 @@
+SELECT employee_id, department_id FROM
+  (SELECT employee_id, department_id, COUNT(employee_id) AS num
+  FROM Employee
+  GROUP BY employee_id
+  HAVING num = 1) AS first
+UNION
+SELECT employee_id, department_id FROM
+  (SELECT * FROM Employee
+  WHERE primary_flag = 'Y') AS second
